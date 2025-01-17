@@ -109,7 +109,7 @@ const LoginPage = () => {
             {/* Right side - Image */}
             <div className="w-11/12 bg-gray-100">
                 <img
-                    src="/images/login.jpg"
+                    src="/images/pilotboat2.jpg"
                     alt="Login illustration"
                     className="w-full h-full object-cover"
                 />
