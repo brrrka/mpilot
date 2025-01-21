@@ -1,149 +1,103 @@
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 
-const RegisterPage = () => {
+const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
-        name: '',
         email: '',
-        password: '',
-        confirmPassword: ''
+        password: ''
     });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle register logic here
-        console.log('Register submitted:', formData);
-    };
-
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+        console.log('Login attempt:', formData);
     };
 
     return (
-        <div className="flex h-screen w-full">
-            {/* Left side - Form */}
-            <div className="w-1/2 flex flex-col justify-center items-center p-16">
-                <div className="w-full max-w-md">
-                    <h1 className="text-4xl font-bold mb-2 text-red-500">MPilot</h1>
-                    <p className="text-gray-600 mb-8">Create an account to get started!</p>
-
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Full Name
-                            </label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
-                                placeholder="Enter your full name"
-                                required
-                            />
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
-                                placeholder="Enter your email"
-                                required
-                            />
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Password
-                            </label>
-                            <div className="relative">
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    name="password"
-                                    value={formData.password}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
-                                    placeholder="Create a password"
-                                    required
-                                />
-                                <button
-                                    type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                                >
-                                    {showPassword ? (
-                                        <EyeOff className="h-5 w-5 text-gray-400" />
-                                    ) : (
-                                        <Eye className="h-5 w-5 text-gray-400" />
-                                    )}
-                                </button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Confirm Password
-                            </label>
-                            <input
-                                type="password"
-                                name="confirmPassword"
-                                value={formData.confirmPassword}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
-                                placeholder="Confirm your password"
-                                required
-                            />
-                        </div>
-
-                        <div className="flex items-center">
-                            <input
-                                type="checkbox"
-                                id="terms"
-                                className="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded"
-                                required
-                            />
-                            <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
-                                I agree to the Terms of Service and Privacy Policy
-                            </label>
-                        </div>
-
-                        <button
-                            type="submit"
-                            className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition duration-200"
-                        >
-                            Create Account
-                        </button>
-                    </form>
-
-                    <p className="mt-8 text-center text-sm text-gray-600">
-                        Already have an account?{' '}
-                        <a href="/login" className="text-red-500 hover:text-red-600 font-medium">
-                            Sign in
-                        </a>
-                    </p>
-                </div>
+        <div className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center p-4">
+            {/* Background Decorative Elements */}
+            <div className="absolute top-0 left-0 w-32 h-32 md:w-48 md:h-48">
+                {/* Top-left image placeholder */}
+                <div className="w-full h-full bg-gray-100 rounded-full border-2 border-[#90B77D] opacity-50" />
             </div>
 
-            {/* Right side - Image */}
-            <div className="w-1/2 bg-gray-100">
-                <img
-                    src="/images/login.jpg"
-                    alt="Register illustration"
-                    className="w-full h-full object-cover"
-                />
+            <div className="absolute bottom-0 right-0 w-40 h-40 md:w-56 md:h-56">
+                {/* Bottom-right image placeholder */}
+                <div className="w-full h-full border-2 border-[#90B77D] rounded-full opacity-50" />
+            </div>
+
+            <div className="absolute top-10 right-10 w-8 h-8">
+                {/* Top-right small square placeholder */}
+                <div className="w-full h-full border-2 border-[#90B77D] rotate-45" />
+            </div>
+
+            {/* Login Form Card */}
+            <div className="w-full max-w-md p-8 bg-white rounded-3xl shadow-lg relative z-10">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Email Field */}
+                    <div className="space-y-2">
+                        <label className="block text-sm font-medium text-[#42855B]">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-[#90B77D] focus:ring-1 focus:ring-[#90B77D]"
+                            placeholder="Ketikkan email"
+                            required
+                        />
+                    </div>
+
+                    {/* Password Field */}
+                    <div className="space-y-2">
+                        <label className="block text-sm font-medium text-[#42855B]">
+                            Password
+                        </label>
+                        <div className="relative">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                className="w-full px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-[#90B77D] focus:ring-1 focus:ring-[#90B77D]"
+                                placeholder="Ketikkan password"
+                                required
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                            >
+                                {showPassword ? (
+                                    <EyeOff className="h-5 w-5" />
+                                ) : (
+                                    <Eye className="h-5 w-5" />
+                                )}
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                        type="submit"
+                        className="w-full py-3 px-4 bg-[#90B77D] text-white rounded-full hover:bg-[#42855B] transition-colors duration-200 font-medium"
+                    >
+                        Masuk
+                    </button>
+                </form>
             </div>
         </div>
     );
 };
 
-export default RegisterPage;
+export default LoginPage;

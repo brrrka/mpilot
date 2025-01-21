@@ -1,14 +1,11 @@
-import { useState } from "react";
 import { Users, HandCoins, LogOut, ChevronLeft, ChevronRight, Ship, ClipboardList, Navigation, House } from "lucide-react";
 
-const Sidebar = () => {
-    const [isMinimized, setIsMinimized] = useState(false);
-
+const Sidebar = ({ isMinimized, setIsMinimized }) => {
     return (
-        <div className={`h-screen ${isMinimized ? "w-20" : "w-64"} bg-gradient-to-b from-red-600 to-red-400 border-r border-gray-200 flex flex-col transition-all duration-300`}>
+        <div className={`min-h-screen h-full bg-gradient-to-b from-red-600 to-red-400 border-r border-gray-200 flex flex-col transition-all duration-300`}>
             {/* Logo and Toggle Section */}
             <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-                {!isMinimized && <h1 className="text-2xl font-bold text-white ">mPilot</h1>}
+                {!isMinimized && <h1 className="text-2xl font-bold text-white">mPILOT</h1>}
                 <button
                     onClick={() => setIsMinimized(!isMinimized)}
                     className="text-white focus:outline-none"
@@ -19,24 +16,22 @@ const Sidebar = () => {
 
             {/* Navigation Links */}
             <nav className="flex-1 px-2 py-2 space-y-1">
-
                 <div className="space-y-2">
-
-                    <a href="#" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">
+                    <a href="/dashboard" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">
                         <House className="mr-3 h-5 w-5" />
                         {!isMinimized && <span>Dashboard</span>}
                     </a>
 
                     <div className="my-4 border-t border-gray-200"></div>
 
-                    <a href="#" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">
+                    <a href="/kapal" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">
                         <Ship className="mr-3 h-5 w-5" />
                         {!isMinimized && <span>Kapal Masuk / Keluar</span>}
                     </a>
 
                     <a href="#" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">
                         <ClipboardList className="mr-3 h-5 w-5" />
-                        {!isMinimized && <span>mRPKRD</span>}
+                        {!isMinimized && <span>mRPKRO</span>}
                     </a>
 
                     <a href="#" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">

@@ -1,80 +1,176 @@
-
-import { Plus, Eye, Edit, Trash2, Home, Ship } from 'lucide-react';
+import { Home, Ship, Navigation } from 'lucide-react';
 import Sidenav from "../components/SidenavComponent";
+import { BarChart as ReBarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, LineChart, Line, Cell } from 'recharts';
 
 const DashboardPage = () => {
-    // Dummy data
-    const shipData = [
-        { id: 1, rpdk: 'RPDK-001-2024', name: 'KM Sinabung', agent: 'AGN-2024-001' },
-        { id: 2, rpdk: 'RPDK-002-2024', name: 'KM Kelud', agent: 'AGN-2024-002' },
-        { id: 3, rpdk: 'RPDK-003-2024', name: 'KM Dobonsolo', agent: 'AGN-2024-003' },
-        { id: 4, rpdk: 'RPDK-004-2024', name: 'KM Ciremai', agent: 'AGN-2024-004' },
-        { id: 5, rpdk: 'RPDK-005-2024', name: 'KM Umsini', agent: 'AGN-2024-005' },
+    // Dummy data untuk statistik
+    const stats = {
+        totalShips: 245,
+        domesticShips: 180,
+        internationalShips: 65,
+        pilots: 42
+    };
+
+    // Data untuk grafik batang kapal masuk/keluar per bulan
+    const monthlyShipData = [
+        { name: 'Jan', masuk: 40, keluar: 35 },
+        { name: 'Feb', masuk: 45, keluar: 42 },
+        { name: 'Mar', masuk: 38, keluar: 40 },
+        { name: 'Apr', masuk: 50, keluar: 48 },
+        { name: 'Mei', masuk: 42, keluar: 39 },
+        { name: 'Jun', masuk: 47, keluar: 45 }
     ];
+
+    // Data untuk pie chart sebaran kapal
+    const shipDistributionData = [
+        { name: 'Dalam Negeri', value: stats.domesticShips },
+        { name: 'Luar Negeri', value: stats.internationalShips }
+    ];
+
+    // Warna untuk charts
+    const COLORS = ['#ef4444', '#3b82f6'];
 
     return (
         <Sidenav>
-            <div className="p-2">
+            <div className="p-8">
                 {/* Header */}
                 <h1 className="text-2xl font-bold text-red-600 mb-2">
-                    Kapal Masuk / Kapal Keluar
+                    Overview Dashboard
                 </h1>
 
                 {/* Breadcrumbs */}
                 <div className="flex items-center space-x-2 text-sm text-gray-600 mb-6">
                     <Home className="h-4 w-4" />
-                    <span>/</span>
-                    <Ship className="h-4 w-4" />
-                    <span>Kapal Masuk / Kapal Keluar</span>
+                    <span>Dashboard</span>
                 </div>
 
-                {/* Main Card */}
-                <div className="bg-white rounded-lg shadow-md">
-                    {/* Card Header with Add Button */}
-                    <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-                        <h2 className="text-lg font-semibold text-gray-700">Daftar Kapal</h2>
-                        <button className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-red-700 transition-colors">
-                            <Plus className="h-4 w-4" />
-                            <span>Tambah Data</span>
-                        </button>
+                {/* Stats Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    {/* Total Kapal */}
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-gray-500 text-sm">Total Kapal</p>
+                                <h3 className="text-2xl font-bold text-gray-700">{stats.totalShips}</h3>
+                            </div>
+                            <Ship className="h-10 w-10 text-red-600" />
+                        </div>
                     </div>
 
-                    {/* Table */}
-                    <div className="overflow-x-auto">
-                        <table className="w-full">
-                            <thead className="bg-gray-50">
-                                <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No RPDK-MRS</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Kapal</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nomor Agen</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                {shipData.map((ship) => (
-                                    <tr key={ship.id} className="hover:bg-gray-50">
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{ship.id}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{ship.rpdk}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{ship.name}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{ship.agent}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            <div className="flex space-x-2">
-                                                <button className="px-3 py-1 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 flex items-center space-x-1">
-                                                    <Eye className="h-4 w-4" />
-                                                </button>
-                                                <button className="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-lg hover:bg-yellow-200 flex items-center space-x-1">
-                                                    <Edit className="h-4 w-4" />
-                                                </button>
-                                                <button className="px-3 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 flex items-center space-x-1">
-                                                    <Trash2 className="h-4 w-4" />
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                    {/* Kapal Dalam Negeri */}
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-gray-500 text-sm">Kapal Dalam Negeri</p>
+                                <h3 className="text-2xl font-bold text-gray-700">{stats.domesticShips}</h3>
+                            </div>
+                            <Ship className="h-10 w-10 text-blue-600" />
+                        </div>
+                    </div>
+
+                    {/* Kapal Luar Negeri */}
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-gray-500 text-sm">Kapal Luar Negeri</p>
+                                <h3 className="text-2xl font-bold text-gray-700">{stats.internationalShips}</h3>
+                            </div>
+                            <Ship className="h-10 w-10 text-green-600" />
+                        </div>
+                    </div>
+
+                    {/* Jumlah Pandu */}
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-gray-500 text-sm">Jumlah Pandu</p>
+                                <h3 className="text-2xl font-bold text-gray-700">{stats.pilots}</h3>
+                            </div>
+                            <Navigation className="h-10 w-10 text-purple-600" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Charts Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Grafik Kapal Masuk/Keluar */}
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                        <h3 className="text-lg font-semibold text-gray-700 mb-4">Statistik Kapal Masuk/Keluar</h3>
+                        <div className="h-80">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <ReBarChart data={monthlyShipData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Bar dataKey="masuk" fill="#ef4444" name="Kapal Masuk" />
+                                    <Bar dataKey="keluar" fill="#3b82f6" name="Kapal Keluar" />
+                                </ReBarChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+
+                    {/* Sebaran Kapal */}
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                        <h3 className="text-lg font-semibold text-gray-700 mb-4">Sebaran Kapal</h3>
+                        <div className="h-80">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <PieChart>
+                                    <Pie
+                                        data={shipDistributionData}
+                                        cx="50%"
+                                        cy="50%"
+                                        innerRadius={60}
+                                        outerRadius={80}
+                                        fill="#8884d8"
+                                        paddingAngle={5}
+                                        dataKey="value"
+                                        label
+                                    >
+                                        {shipDistributionData.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip />
+                                    <Legend />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+
+                    {/* Trend Kapal Masuk */}
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                        <h3 className="text-lg font-semibold text-gray-700 mb-4">Trend Kapal Masuk</h3>
+                        <div className="h-80">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <LineChart data={monthlyShipData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Line type="monotone" dataKey="masuk" stroke="#ef4444" name="Kapal Masuk" />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+
+                    {/* Trend Kapal Keluar */}
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                        <h3 className="text-lg font-semibold text-gray-700 mb-4">Trend Kapal Keluar</h3>
+                        <div className="h-80">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <LineChart data={monthlyShipData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Line type="monotone" dataKey="keluar" stroke="#3b82f6" name="Kapal Keluar" />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
                 </div>
             </div>

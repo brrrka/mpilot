@@ -26,7 +26,7 @@ const LoginPage = () => {
             {/* Left side - Form */}
             <div className="w-1/2 flex flex-col justify-center items-center p-16">
                 <div className="w-full max-w-md">
-                    <h1 className="text-7xl font-bold mb-2 text-red-500">MPilot</h1>
+                    <h1 className="text-7xl font-bold mb-2 text-red-500">mPILOT</h1>
                     <p className="text-gray-600 mb-8 text-lg">Selamat datang kembali! Silahkan login ke akun mu</p>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -109,7 +109,7 @@ const LoginPage = () => {
             {/* Right side - Image */}
             <div className="w-11/12 bg-gray-100">
                 <img
-                    src="/images/pilotboat2.jpg"
+                    src="/images/login2.png"
                     alt="Login illustration"
                     className="w-full h-full object-cover"
                 />
