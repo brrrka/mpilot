@@ -29,17 +29,17 @@ const Sidebar = ({ isMinimized, setIsMinimized }) => {
                         {!isMinimized && <span>Kapal Masuk / Keluar</span>}
                     </a>
 
-                    <a href="#" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">
+                    <a href="/MRPKRO" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">
                         <ClipboardList className="mr-3 h-5 w-5" />
                         {!isMinimized && <span>mRPKRO</span>}
                     </a>
 
-                    <a href="#" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">
+                    <a href="/MSPKP" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">
                         <Navigation className="mr-3 h-5 w-5" />
                         {!isMinimized && <span>mSPKP</span>}
                     </a>
 
-                    <a href="#" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">
+                    <a href="/MHPKP" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">
                         <HandCoins className="mr-3 h-5 w-5" />
                         {!isMinimized && <span>mHPKP</span>}
                     </a>
@@ -50,7 +50,7 @@ const Sidebar = ({ isMinimized, setIsMinimized }) => {
 
                 {/* User Management Section */}
                 <div>
-                    <a href="#" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">
+                    <a href="/user-management" className="flex items-center px-4 py-2 text-white hover:bg-red-300 hover:text-black rounded-lg">
                         <Users className="mr-3 h-5 w-5" />
                         {!isMinimized && <span>User Management</span>}
                     </a>
