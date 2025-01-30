@@ -1,6 +1,7 @@
 import { Plus, Eye, FileText, Home, Ship } from 'lucide-react';
 import Sidenav from '../components/SidenavComponent';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const MSPKPPage = () => {
     // Dummy data
@@ -67,6 +68,12 @@ const MSPKPPage = () => {
         }
     ]);
 
+    const navigate = useNavigate();
+
+    const handleAddButtonClick = () => {
+        navigate('/mspkp/form');
+    }
+
     return (
         <Sidenav>
             <div className="p-2">
@@ -88,7 +95,7 @@ const MSPKPPage = () => {
                     {/* Card Header with Add Button */}
                     <div className="p-4 border-b border-gray-200 flex justify-between items-center">
                         <h2 className="text-lg font-semibold text-gray-700">Daftar MSPKP</h2>
-                        <button className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-red-700 transition-colors">
+                        <button className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-red-700 transition-colors" onClick={handleAddButtonClick}>
                             <Plus className="h-4 w-4" />
                             <span>Add Data</span>
                         </button>

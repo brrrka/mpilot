@@ -1,6 +1,7 @@
 import { Plus, Eye, FileText, Home, Ship } from 'lucide-react';
 import Sidenav from "../components/SidenavComponent";
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const MRPKROPage = () => {
     // Dummy data
@@ -43,6 +44,12 @@ const MRPKROPage = () => {
         }
     ]);
 
+    const navigate = useNavigate();
+
+    const handleAddButtonClick = () => {
+        navigate('/mrpkro/form');
+    }
+
     return (
         <Sidenav>
             <div className="p-2">
@@ -64,7 +71,7 @@ const MRPKROPage = () => {
                     {/* Card Header with Add Button */}
                     <div className="p-4 border-b border-gray-200 flex justify-between items-center">
                         <h2 className="text-lg font-semibold text-gray-700">Daftar MRPKRO</h2>
-                        <button className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-red-700 transition-colors">
+                        <button className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-red-700 transition-colors" onClick={handleAddButtonClick}>
                             <Plus className="h-4 w-4" />
                             <span>Add Data</span>
                         </button>
@@ -110,8 +117,8 @@ const MRPKROPage = () => {
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm">
                                             <span className={`px-2 py-1 rounded-full text-xs ${item.status === 'VERIFIKASI' ? 'bg-purple-100 text-purple-600' :
-                                                    item.status === 'DISETUJUI' ? 'bg-green-100 text-green-600' :
-                                                        'bg-gray-100 text-gray-600'
+                                                item.status === 'DISETUJUI' ? 'bg-green-100 text-green-600' :
+                                                    'bg-gray-100 text-gray-600'
                                                 }`}>
                                                 {item.status}
                                             </span>

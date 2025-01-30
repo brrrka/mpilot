@@ -20,14 +20,11 @@ const DashboardPage = () => {
         { name: 'Mei', masuk: 42, keluar: 39 },
         { name: 'Jun', masuk: 47, keluar: 45 }
     ];
-
-    // Data untuk pie chart sebaran kapal
     const shipDistributionData = [
         { name: 'Dalam Negeri', value: stats.domesticShips },
         { name: 'Luar Negeri', value: stats.internationalShips }
     ];
 
-    // Warna untuk charts
     const COLORS = ['#ef4444', '#3b82f6'];
 
     return (

@@ -1,6 +1,7 @@
 
 import { Plus, Eye, Edit, Trash2, Home, Ship } from 'lucide-react';
 import Sidenav from "../components/SidenavComponent";
+import { useNavigate } from 'react-router-dom';
 
 const DashboardPage = () => {
     // Dummy data
@@ -11,6 +12,12 @@ const DashboardPage = () => {
         { id: 4, rpdk: 'RPDK-004-2024', name: 'KM Ciremai', agent: 'AGN-2024-004' },
         { id: 5, rpdk: 'RPDK-005-2024', name: 'KM Umsini', agent: 'AGN-2024-005' },
     ];
+
+    const navigate = useNavigate();
+
+    const handleAddButtonClick = () => {
+        navigate('/kapal/form');
+    }
 
     return (
         <Sidenav>
@@ -33,7 +40,7 @@ const DashboardPage = () => {
                     {/* Card Header with Add Button */}
                     <div className="p-4 border-b border-gray-200 flex justify-between items-center">
                         <h2 className="text-lg font-semibold text-gray-700">Daftar Kapal</h2>
-                        <button className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-red-700 transition-colors">
+                        <button className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-red-700 transition-colors" onClick={handleAddButtonClick}>
                             <Plus className="h-4 w-4" />
                             <span>Add Data</span>
                         </button>

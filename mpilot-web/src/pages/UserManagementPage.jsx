@@ -1,6 +1,7 @@
 import { Plus, Eye, Edit, Trash2, Home, Users } from 'lucide-react';
 import Sidenav from "../components/SidenavComponent";
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const UserManagementPage = () => {
     // Dummy data untuk users website
@@ -38,6 +39,12 @@ const UserManagementPage = () => {
         },
     ]);
 
+    const navigate = useNavigate();
+
+    const handleAddButtonClick = (type) => {
+        navigate(`/user-management/${type}-form`);
+    }
+
     return (
         <Sidenav>
             <div className="p-2">
@@ -59,7 +66,7 @@ const UserManagementPage = () => {
                     {/* Card Header with Add Button */}
                     <div className="p-4 border-b border-gray-200 flex justify-between items-center">
                         <h2 className="text-lg font-semibold text-gray-700">Daftar User Website</h2>
-                        <button className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-red-700 transition-colors">
+                        <button className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-red-700 transition-colors" onClick={() => handleAddButtonClick('user')}>
                             <Plus className="h-4 w-4" />
                             <span>Add User</span>
                         </button>
@@ -123,7 +130,7 @@ const UserManagementPage = () => {
                     {/* Card Header with Add Button */}
                     <div className="p-4 border-b border-gray-200 flex justify-between items-center">
                         <h2 className="text-lg font-semibold text-gray-700">Daftar Pandu</h2>
-                        <button className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-red-700 transition-colors">
+                        <button className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-red-700 transition-colors" onClick={() => handleAddButtonClick('pandu')}>
                             <Plus className="h-4 w-4" />
                             <span>Add Pandu</span>
                         </button>

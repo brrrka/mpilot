@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Home, Users, ArrowLeft } from 'lucide-react';
 import Sidenav from "../../components/SidenavComponent";
+import { useNavigate } from 'react-router-dom';
 
 const UserFormPage = () => {
     const [formData, setFormData] = useState({
@@ -11,6 +12,12 @@ const UserFormPage = () => {
         confirmPassword: '',
         status: 'active'
     });
+
+    const navigate = useNavigate();
+
+    const handleBackButtonClick = () => {
+        navigate('/user-management')
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -44,7 +51,7 @@ const UserFormPage = () => {
                 </div>
 
                 {/* Back Button */}
-                <button className="mb-4 flex items-center text-gray-600 hover:text-red-600 transition-colors">
+                <button className="mb-4 flex items-center text-gray-600 hover:text-red-600 transition-colors" onClick={handleBackButtonClick}>
                     <ArrowLeft className="h-4 w-4 mr-2" />
                     Kembali
                 </button>
